@@ -1,0 +1,236 @@
+# Filter rules and master firm list for the Summer 2027 quant intern monitor.
+# Tune these without code changes — filters.py reads this file.
+
+filters:
+  # Title (case-insensitive, word-boundary aware) must include at least one of:
+  must_include_any:
+    - intern
+    - internship
+  # AND must include at least one of:
+  must_include_role_any:
+    - quant
+    - quantitative
+    - trader
+    - trading
+    - researcher
+    - research
+    - systematic
+    - algorithmic
+    - algo
+  # AND must NOT contain any of these (substring match, case-insensitive):
+  must_exclude_any:
+    - software engineer intern
+    - swe intern
+    - hr intern
+    - marketing
+    - recruiting
+    - operations intern
+    - compliance intern
+    - legal intern
+    - audit intern
+    - graphic
+    - design intern
+    - data engineer intern
+  # Year handling
+  pass_year: "2027"
+  reject_years:
+    - "2024"
+    - "2025"
+    - "2026"
+
+sources:
+  simplify:
+    primary: https://raw.githubusercontent.com/SimplifyJobs/Summer2027-Internships/dev/.github/scripts/listings.json
+    fallback: https://raw.githubusercontent.com/SimplifyJobs/Summer2026-Internships/dev/.github/scripts/listings.json
+  northwestern:
+    api: https://api.github.com/repos/northwesternfintech/2027QuantInternships/contents/data
+    raw_base: https://raw.githubusercontent.com/northwesternfintech/2027QuantInternships/main/data
+
+# Per-firm config. `careers_url` is the page detect.py sniffs for an ATS embed.
+# null means we have no canonical URL yet — the monitor logs it and skips.
+# `ats` + `slug` is an explicit override that skips auto-detection (preferred
+# when the careers page is bot-blocked or doesn't expose the embed in HTML).
+# notify_on_close: true on a firm makes the diff send a "closed" embed when a posting disappears.
+firms:
+  # ----- Tier 1: elite quant trading & top quant funds -----
+  - { name: "Jane Street",                 careers_url: "https://www.janestreet.com/join-jane-street/open-roles/?type=students-and-new-grads", ats: "greenhouse", slug: "janestreet" }
+  - { name: "Citadel",                     careers_url: "https://www.citadel.com/careers/open-opportunities/students/internships/" }
+  - { name: "Citadel Securities",          careers_url: "https://www.citadelsecurities.com/careers/open-opportunities/students/" }
+  - { name: "DRW",                         careers_url: "https://drw.com/work-at-drw/category/campus" }
+  - { name: "Jump Trading",                careers_url: "https://www.jumptrading.com/careers/", ats: "greenhouse", slug: "jumptrading" }
+  - { name: "Tower Research Capital",      careers_url: "https://www.tower-research.com/open-positions/" }
+  - { name: "Optiver",                     careers_url: "https://optiver.com/working-at-optiver/career-opportunities/", ats: "greenhouse", slug: "optiver" }
+  - { name: "Susquehanna (SIG)",           careers_url: "https://careers.sig.com/intern-openings" }
+  - { name: "Hudson River Trading",        careers_url: "https://www.hudsonrivertrading.com/careers/", ats: "greenhouse", slug: "hrttalentcommunity" }
+  - { name: "Two Sigma",                   careers_url: "https://careers.twosigma.com/careers/OpenRoles/" }
+  - { name: "D.E. Shaw",                   careers_url: "https://www.deshaw.com/careers" }
+  - { name: "Renaissance Technologies",    careers_url: "https://www.rentec.com/Careers.action" }
+  - { name: "Millennium Management",       careers_url: "https://www.mlp.com/careers/" }
+  - { name: "Point72 Asset Management",    careers_url: "https://careers.point72.com/", ats: "greenhouse", slug: "point72" }
+  - { name: "Bridgewater Associates",      careers_url: "https://www.bridgewater.com/careers" }
+  - { name: "Castleton Commodities",       careers_url: "https://www.castletoncommodities.com/careers/" }
+  - { name: "Qube Research & Technologies", careers_url: "https://www.qube-rt.com/careers" }
+  - { name: "AQR Capital Management",      careers_url: "https://www.aqr.com/About-Us/Careers", ats: "greenhouse", slug: "aqr" }
+  - { name: "XTX Markets",                 careers_url: "https://www.xtxmarkets.com/careers/", ats: "greenhouse", slug: "xtxmarketstechnologies" }
+  - { name: "Wintermute",                  careers_url: "https://www.wintermute.com/careers" }
+  - { name: "Brevan Howard",               careers_url: "https://www.brevanhoward.com/careers/" }
+  - { name: "Man Group",                   careers_url: "https://www.man.com/careers" }
+  - { name: "Balyasny Asset Management",   careers_url: "https://bambusdorf.com/careers" }
+  - { name: "Winton Group",                careers_url: "https://www.winton.com/careers", ats: "greenhouse", slug: "winton" }
+  - { name: "Goldenberg Hehmeyer",         careers_url: null }
+  - { name: "Dare International",          careers_url: null }
+  - { name: "Tibra Capital",               careers_url: null }
+
+  # ----- Tier 2: prop shops, market makers, multi-strat HFs -----
+  - { name: "Belvedere Trading",           careers_url: "https://www.belvederetrading.com/careers/", ats: "lever", slug: "belvederetrading" }
+  - { name: "Akuna Capital",               careers_url: "https://akunacapital.com/careers", ats: "greenhouse", slug: "akunacapital" }
+  - { name: "IMC Trading",                 careers_url: "https://careers.imc.com/us/en/student-opportunities" }
+  - { name: "Wolverine Trading",           careers_url: "https://www.wolve.com/careers" }
+  - { name: "Flow Traders",                careers_url: "https://www.flowtraders.com/careers", ats: "greenhouse", slug: "flowtraders" }
+  - { name: "Virtu Financial",             careers_url: "https://www.virtu.com/about/careers/", ats: "greenhouse", slug: "virtu" }
+  - { name: "Group One Trading",           careers_url: "https://www.group1.com/careers" }
+  - { name: "GTS",                         careers_url: "https://www.gtsx.com/careers" }
+  - { name: "Quadrature Capital",          careers_url: "https://www.quadrature.ai/careers", ats: "greenhouse", slug: "quadraturecapital" }
+  - { name: "Vatic Investments",           careers_url: "https://vaticinvestments.com/careers", ats: "greenhouse", slug: "vaticlabs" }
+  - { name: "Walleye Capital",             careers_url: "https://walleyecapital.com/careers/", ats: "greenhouse", slug: "walleyecapital" }
+  - { name: "Maven Derivatives",           careers_url: "https://mavensecurities.com/careers/", ats: "greenhouse", slug: "maven" }
+  - { name: "Maven Securities",            careers_url: "https://mavensecurities.com/careers/", ats: "greenhouse", slug: "maven" }
+  - { name: "Simplex Investments",         careers_url: null }
+  - { name: "Quantitative Brokers",        careers_url: "https://www.quantitativebrokers.com/careers" }
+  - { name: "B2C2",                        careers_url: "https://www.b2c2.com/careers", ats: "greenhouse", slug: "b2c2" }
+  - { name: "Alchemy Trading",             careers_url: null }
+  - { name: "FNY Capital Management",      careers_url: null }
+  - { name: "GSR Markets",                 careers_url: "https://www.gsr.io/careers", ats: "greenhouse", slug: "gsrmarkets" }
+  - { name: "Mandara Capital",             careers_url: null }
+  - { name: "ExodusPoint Capital Management", careers_url: "https://www.exoduspoint.com/careers", ats: "greenhouse", slug: "exoduspoint" }
+  - { name: "Verition Fund Management",    careers_url: "https://www.verition.com/careers" }
+  - { name: "MKP Capital Management",      careers_url: null }
+  - { name: "Whitebox Advisors",           careers_url: "https://whiteboxadvisors.com/careers" }
+  - { name: "Silver Point Capital",        careers_url: null }
+  - { name: "Pine River Capital Management", careers_url: null }
+  - { name: "Saba Capital Management",     careers_url: null }
+  - { name: "Hutchin Hill Capital",        careers_url: null }
+  - { name: "BlueMountain Capital Management", careers_url: null }
+  - { name: "Magnetar Capital",            careers_url: "https://www.magnetar.com/careers/", ats: "greenhouse", slug: "magnetar" }
+  - { name: "Highbridge Capital Management", careers_url: "https://www.highbridge.com/careers/" }
+  - { name: "GSA Capital Partners",        careers_url: "https://www.gsacapital.com/careers/", ats: "greenhouse", slug: "gsacapital" }
+  - { name: "G-Research",                  careers_url: "https://www.gresearch.com/careers/" }
+  - { name: "Caxton Associates",           careers_url: "https://www.caxton.com/careers" }
+  - { name: "Tudor Investment Corporation", careers_url: "https://www.tudor.com/careers" }
+  - { name: "CQS",                         careers_url: null }
+
+  # ----- Tier 3: hedge funds, asset managers (broader coverage) -----
+  - { name: "Third Point",                 careers_url: null }
+  - { name: "Elliott Management",          careers_url: null }
+  - { name: "Lone Pine Capital",           careers_url: null }
+  - { name: "Sculptor Capital Management", careers_url: null }
+  - { name: "TCI Fund Management",         careers_url: null }
+  - { name: "Baupost Group",               careers_url: null }
+  - { name: "Greenlight Capital",          careers_url: null, ats: "ashby", slug: "greenlight" }
+  - { name: "Pershing Square Capital Management", careers_url: null }
+  - { name: "Viking Global Investors",     careers_url: null }
+  - { name: "Tiger Global Management",     careers_url: null }
+  - { name: "Blackstone Alternative Asset Management", careers_url: "https://www.blackstone.com/careers/" }
+  - { name: "Canyon Partners",             careers_url: null }
+  - { name: "Soros Fund Management",       careers_url: null }
+  - { name: "Glenview Capital Management", careers_url: null }
+  - { name: "Anchorage Capital Group",     careers_url: null }
+  - { name: "Lansdowne Partners",          careers_url: null }
+  - { name: "Trian Fund Management",       careers_url: null }
+  - { name: "Fir Tree Partners",           careers_url: null }
+  - { name: "GoldenTree Asset Management", careers_url: null }
+  - { name: "Omega Advisors",              careers_url: null }
+  - { name: "Luxor Capital Group",         careers_url: null }
+  - { name: "JANA Partners",               careers_url: null }
+  - { name: "Suvretta Capital Management", careers_url: null }
+  - { name: "Cadian Capital Management",   careers_url: null }
+  - { name: "Paulson Investment Company",  careers_url: null }
+  - { name: "Paulson & Company",           careers_url: null }
+  - { name: "Senator Investment Group",    careers_url: null }
+  - { name: "Brahman Capital",             careers_url: null }
+  - { name: "Mason Capital Management",    careers_url: null }
+  - { name: "Cyrus Capital Partners",      careers_url: null }
+  - { name: "SRS Investment Management",   careers_url: null }
+  - { name: "Bridger Management",          careers_url: null }
+  - { name: "Soroban Capital Partners",    careers_url: null }
+  - { name: "Passport Capital",            careers_url: null }
+  - { name: "Hoplite Capital Management",  careers_url: null }
+  - { name: "York Capital Management",     careers_url: null }
+  - { name: "White Elm Capital",           careers_url: null }
+  - { name: "Shumway Capital Partners",    careers_url: null }
+  - { name: "Highfields Capital Management", careers_url: null }
+  - { name: "Discovery Capital Management", careers_url: null }
+  - { name: "Farallon Capital Management", careers_url: null }
+  - { name: "King Street Capital Management", careers_url: null }
+  - { name: "Davidson Kempner",            careers_url: null }
+  - { name: "Marathon Asset Management",   careers_url: null }
+  - { name: "Lone Star Funds",             careers_url: null }
+  - { name: "PointState Capital",          careers_url: null }
+  - { name: "Coatue Management",           careers_url: null }
+  - { name: "TPG Capital",                 careers_url: null }
+  - { name: "TPG Sixth Street Partners",   careers_url: null, ats: "greenhouse", slug: "sixthstreet" }
+  - { name: "Apollo Global Management",    careers_url: "https://www.apollo.com/careers", ats: "greenhouse", slug: "apollo" }
+  - { name: "Angelo Gordon",               careers_url: null }
+  - { name: "Eton Park Capital Management", careers_url: null }
+  - { name: "Altimeter Capital Management", careers_url: null }
+  - { name: "Pershing Square Holdings",    careers_url: null }
+  - { name: "XR Trading",                  careers_url: "https://www.xrtrading.com/careers/" }
+  - { name: "Quantlab Financial",          careers_url: "https://www.quantlab.com/careers/" }
+  - { name: "Spot Trading",                careers_url: null }
+  - { name: "Allston Trading",             careers_url: null }
+  - { name: "Geneva Trading",              careers_url: "https://www.genevatrading.com/careers", ats: "greenhouse", slug: "genevatrading" }
+  - { name: "Ronin Capital",               careers_url: null }
+  - { name: "DV Trading",                  careers_url: "https://dvtrading.co/careers/", ats: "greenhouse", slug: "dvtrading" }
+  - { name: "First New York Securities",   careers_url: null }
+  - { name: "Teza Technologies",           careers_url: null }
+  - { name: "HTG Capital Partners",        careers_url: null }
+  - { name: "Bright Trading",              careers_url: null }
+  - { name: "Mako Global Derivatives",     careers_url: null }
+  - { name: "OSTC",                        careers_url: null }
+  - { name: "Grasshopper",                 careers_url: null }
+  - { name: "Elk Capital",                 careers_url: null }
+  - { name: "Bluefin Europe",              careers_url: null }
+
+  # ----- Banks & broker-dealers -----
+  - { name: "JPMorgan Chase",              careers_url: "https://careers.jpmorgan.com/us/en/students/programs" }
+  - { name: "Goldman Sachs",               careers_url: "https://www.goldmansachs.com/careers/students/" }
+  - { name: "Morgan Stanley",              careers_url: "https://www.morganstanley.com/people/early-careers" }
+  - { name: "Citigroup",                   careers_url: "https://jobs.citi.com/students-and-graduates" }
+  - { name: "Bank of America Merrill Lynch", careers_url: "https://campus.bankofamerica.com/" }
+  - { name: "Credit Suisse",               careers_url: null }
+  - { name: "Barclays",                    careers_url: "https://search.jobs.barclays/" }
+  - { name: "Deutsche Bank",               careers_url: "https://www.db.com/careers/" }
+  - { name: "UBS",                         careers_url: "https://www.ubs.com/global/en/careers.html" }
+  - { name: "HSBC",                        careers_url: "https://www.hsbc.com/careers" }
+  - { name: "Wells Fargo",                 careers_url: "https://www.wellsfargojobs.com/" }
+  - { name: "BNP Paribas",                 careers_url: "https://group.bnpparibas/en/careers" }
+  - { name: "Société Générale",            careers_url: "https://careers.societegenerale.com/" }
+  - { name: "RBC Capital Markets",         careers_url: "https://jobs.rbc.com/" }
+  - { name: "Nomura",                      careers_url: "https://www.nomura.com/careers/" }
+  - { name: "Mizuho",                      careers_url: null }
+  - { name: "Santander",                   careers_url: null }
+  - { name: "Standard Chartered",          careers_url: null }
+  - { name: "Lloyds Banking Group",        careers_url: null }
+  - { name: "ING Group",                   careers_url: null }
+  - { name: "NatWest Markets",             careers_url: null }
+  - { name: "Commerzbank",                 careers_url: null }
+  - { name: "Scotiabank",                  careers_url: null }
+  - { name: "BBVA",                        careers_url: null }
+  - { name: "MUFG",                        careers_url: null }
+  - { name: "Nordea Bank",                 careers_url: null }
+  - { name: "DNB Bank",                    careers_url: null }
+  - { name: "PNC Financial Services",      careers_url: null }
+  - { name: "BMO Capital Markets",         careers_url: null }
+  - { name: "Fifth Third Bank",            careers_url: null }
+  - { name: "SMFG",                        careers_url: null }
+  - { name: "TD Securities",               careers_url: null }
+  - { name: "SunTrust Robinson Humphrey",  careers_url: null }
+  - { name: "KeyBanc Capital Markets",     careers_url: null }
+  - { name: "Rabobank",                    careers_url: null }
+  - { name: "Citi Private Bank",           careers_url: null }
+  - { name: "Jefferies",                   careers_url: "https://www.jefferies.com/careers/" }
+  - { name: "Evercore",                    careers_url: "https://www.evercore.com/careers/" }
+  - { name: "Raymond James",               careers_url: null }
+  - { name: "ICBC",                        careers_url: null }
+  - { name: "Mitsubishi UFJ Securities",   careers_url: null }
+  - { name: "Macquarie Group",             careers_url: "https://www.macquarie.com/us/en/about/careers.html" }
