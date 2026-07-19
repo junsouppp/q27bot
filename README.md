@@ -1,5 +1,7 @@
 # q27bot — Summer 2027 Quant Intern Monitor
 
+#this is a test
+
 Polls three sources every 30 minutes for Summer 2027 quantitative trading /
 research internships and pings a Discord webhook when something new lands.
 Runs entirely on GitHub Actions; state lives as JSON in this repo, so the
